@@ -1,7 +1,7 @@
 # a101-bootcamp-odev3-GokalpAvcu
 a101-bootcamp-odev3-GokalpAvcu created by GitHub Classroom
 
-<!-- NoSQL ve SQL arasındaki farklar -->
+ ---- NoSQL ve SQL arasındaki farklar ----
 
 • SQL veritabanları öncelikle İlişkisel Veritabanları (RDBMS) olarak adlandırılır; 
 • NoSQL veritabanı ise öncelikle ilişkisel olmayan veya dağıtılmış veritabanı olarak adlandırılır.
