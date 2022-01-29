@@ -1,25 +1,27 @@
 const AWS=require('aws-sdk');
 const { v4: uuidv4 } = require("uuid");
 
+// aws configuration
 AWS.config.update({
     region: "us-east-1",
-    accessKeyId: "AKIATGESNJ6G5MWNZE5Q",
-    secretAccessKey: "u4M5XU79LLtKadOL0eNa68ttA9vs5crEvi5P",
+    accessKeyId: "access_key",
+    secretAccessKey: "secret_key",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com",
 })
 
-var docClient = new AWS.DynamoDB.DocumentClient();
+let docClient = new AWS.DynamoDB.DocumentClient();
+let TABLE_NAME = "product";
 
-var TABLE_NAME = "product";
 
+// add products to the products table
 exports.add=async (params)=>{
-    var item = {
+    let item = {
         TableName: TABLE_NAME,
         Item:{
-          productID: uuidv4(),
+          productId: uuidv4(),
+          isDiscount:params.isDiscount,
           stock: params.stock,
           productName: params.productName,
-          isDiscount:params.isDiscount,
           category: {
             categoryId: params.category.categoryId,
             categoryName: params.category.categoryName,
@@ -31,18 +33,23 @@ exports.add=async (params)=>{
         await docClient.put(item).promise();
         return{
           status:true,
-          message:"Product Added"
+          message:"Product added"
         }
       }
-      catch(err){
-        return err
+      catch(error){
+        return err{
+          status : false,
+          message: error
+        }
       }
 }
-exports.singleFetch= async(params)=>{
+
+
+exports.getById= async(params)=>{ // get product by id (url den id verilir)
     const items={
       TableName:TABLE_NAME,
       Key:{
-        productID:params.id
+        productId:params.id
       }
     }
     try{
@@ -52,7 +59,7 @@ exports.singleFetch= async(params)=>{
         data:data
       }
     }
-    catch (err){
+    catch (error){
       return {
         status:false,
         message:err
@@ -60,7 +67,7 @@ exports.singleFetch= async(params)=>{
     }
   
 }
-exports.fetchAll=async()=>{
+exports.getByDiscount=async()=>{
     const items={
       TableName:TABLE_NAME
     }
@@ -82,7 +89,7 @@ exports.delete= async(params)=>{
   const items={
     TableName:TABLE_NAME,
     Key:{
-      productID:params.productID
+      productId:params.productId
     }
   }
   try{
@@ -113,7 +120,7 @@ exports.update= async(params)=>{
   var item ={
     TableName:TABLE_NAME,
     Key:{
-      "productID":params.productID
+      "productId":params.productId
     },
     UpdateExpression:"set stock= :stock",
     ExpressionAttributeValues:{
