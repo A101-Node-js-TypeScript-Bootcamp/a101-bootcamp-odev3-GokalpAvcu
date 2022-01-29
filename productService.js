@@ -3,8 +3,8 @@ const { v4: uuidv4 } = require("uuid");
 
 AWS.config.update({
     region: "us-east-1",
-    accessKeyId: "AKIAUCN7BBY33UELQRFO",
-    secretAccessKey: "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",
+    accessKeyId: "AKIATGESNJ6G5MWNZE5Q",
+    secretAccessKey: "u4M5XU79LLtKadOL0eNa68ttA9vs5crEvi5P",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com",
 })
 
