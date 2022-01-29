@@ -45,7 +45,7 @@ exports.add=async (params)=>{
 }
 
 
-exports.getById= async(params)=>{ // get product by id (url den id verilir)
+exports.getById= async(params)=>{ // get product by id 
     const items={
       TableName:TABLE_NAME,
       Key:{
